@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="margin-left: 20%;">
+    Confirm Delete
+</h1>
+<p style="margin-left: 20%;">Are you sure you want to delete "{{item.title}}"</p>
+<form method="POST">
+    {% csrf_token %}
+    <input style="margin-left: 25%;" class="btn btn-sm btn-success"  type="submit" name="Continue">
+    <a class="btn btn-sm btn-danger"  href="{% url 'notes_page' %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,14 @@
+        {% extends 'base.html' %}
+        {% block content %}
+        <h1>Hello World</h1>
+        {{ request.user }}<br>
+        {{ my_text }}, {{ my_key }}
+        <ul>
+            {% for my_items in my_list %}
+            <li>{{ my_items }}</li>
+            {% endfor %}
+        </ul>
+        <p>Paraaaaa</p> 
+        <span>Hello,{{request.user}}</span>
+        <span><a href="{% url 'logout_page' %}">Logout</a></span>
+        {% endblock %} 

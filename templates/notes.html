@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="split left">
+    <div class="centered">
+        <h1 style="margin-left: 5%;">Welcome {{request.user}},</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group margi-lef" >
+            <label>Title</label>
+            <p>{{ form.title }}</p>
+            <label>Description</label>
+            <p>{{ form.description }}</p>
+            </div>
+            <button style="margin-left: 25%;" type="submit" class="btn  btn-success"><span style="width: 18px; height: 18px;" class="spinner-grow spinner-grow-sm"> </span> Save Notes </button>
+            <br>
+        </form>
+        <br>
+    </div>
+  </div>
+  <div class="split right">
+    <div class="centered">
+    <h2>Notes by {{ request.user }}</h2>
+    {% for item in user.notes.all reversed %}
+    <ul >
+        <li >{{item.id}} - {{ item.title }}</li>
+        {{item.description}}
+        <br>
+        <a class="btn btn-sm btn-info" href="{% url 'update_page' item.id %}">Update</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'delete_page' item.id %}">Delete</a>
+        <br>
+        <br>
+        <a class='btn btn-sm btn-dark' href="{% url 'logout_page' %}">Logout</a>
+    </ul>
+    {% endfor %}
+    </div>
+  </div>
+  
+ 
+
+{% endblock %} 
