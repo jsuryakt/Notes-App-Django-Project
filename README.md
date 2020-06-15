@@ -12,6 +12,16 @@ Django is a high-level Python Web framework that encourages rapid development an
 - Send a pull request.
 
 I will review it and if I find the feature interesting will include it in the main project.
+<p align="absolute">
+  <img src="ignore_this/Screenshot (67).png" >
+  <img src="ignore_this/Screenshot (62).png" >
+  <img src="ignore_this/Screenshot (63).png" >
+  <img src="ignore_this/Screenshot (69).png" >
+  <img src="ignore_this/Screenshot (65).png" >
+  <img src="ignore_this/Screenshot (66).png" >
+  <img src="ignore_this/Screenshot (67).png" >
+
+</p>
 
 # Starting your Django project
 
