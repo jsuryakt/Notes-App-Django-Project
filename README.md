@@ -4,6 +4,15 @@ Notes Application lets you store notes online, it can be anything from storing y
 You can access it anywhere using https://jsuryakt.pythonanywhere.com/
 #### Quick-Tip :- If you want to copy something from your desktop to phone or vice versa, just save it in Notes and access using the other device.
 Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. All documentation is in the "docs" directory and online at https://docs.djangoproject.com
+#### Feel free to Contribute to this Project, by following these steps:
+- Fork the project.
+- Create a new branch.
+- Make your changes and write tests when practical.
+- Commit your changes to the new branch.
+- Send a pull request.
+
+I will review it and if I find the feature interesting will include it in the main project.
+
 # Starting your Django project
 
 You've installed Python and the other utilities (pip, virtualenv, and git) on
