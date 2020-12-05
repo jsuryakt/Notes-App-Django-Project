@@ -51,6 +51,7 @@ def login_view(request,*args,**kwargs):
                 messages.info(request, 'Username OR Password Incorrect')
         return render(request,"login.html",{})
 
+@login_required(login_url='login_page')
 def logoutUser(request):
     logout(request)
     return redirect('login_page')
