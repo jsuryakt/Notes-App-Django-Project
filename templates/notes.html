@@ -2,36 +2,63 @@
 {% block content %}
 <div class="split left">
     <div class="centered">
-        <h1 style="margin-left: 5%;">Welcome {{request.user}},</h1>
-        <form method="POST">
+       <div class="welcome"><h1 style="margin-left: 5%;">Welcome {{request.user}},</h1></div>
+       <br>
+       <br>
+       <br>
+       <br>
+        <div class="welcome2">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group margi-lef" >
+            <div   class="form-group margi-lef" >
             <label>Title</label>
             <p>{{ form.title }}</p>
             <label>Description</label>
             <p>{{ form.description }}</p>
+            <p>Image</p>
+            <p name="image">{{form.image}}</p>
             </div>
             <button style="margin-left: 25%;" type="submit" class="btn  btn-success"><span style="width: 18px; height: 18px;" class="spinner-grow spinner-grow-sm"> </span> Save Notes </button>
             <br>
         </form>
+      </div>
         <br>
     </div>
   </div>
   <div class="split right">
     <div class="centered">
-    <h2>Notes by {{ request.user }}</h2>
+    <div class="welcome1"><h2  style="margin-left: 5%;">Your Contents</h2></div>
+    {% if user.notes.all %}
     {% for item in user.notes.all reversed %}
-    <ul >
-        <li >{{item.id}} - {{ item.title }}</li>
-        {{item.description}}
-        <br>
-        <a class="btn btn-sm btn-info" href="{% url 'update_page' item.id %}">Update</a>
-        <a class="btn btn-sm btn-danger" href="{% url 'delete_page' item.id %}">Delete</a>
-        <br>
-        <br>
-        <a class='btn btn-sm btn-dark' href="{% url 'logout_page' %}">Logout</a>
-    </ul>
+  
+      <div class="myDiv">
+          <hr>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description}}</p>
+          <br>
+          <div>
+          {% if item.image %}
+          <a href= "{{ item.image.url }}" download>
+             <img src="{{ item.image.url }}" class="img-responsive" style="width: 400px;height:200px; margin-right: 10px;"/>        
+          </a>
+            {% endif %}
+         </div>
+         
+          <a class="btn btn-sm btn-info" href="{% url 'update_page' item.id %}">Update</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'delete_page' item.id %}">Delete</a>
+          <br>
+        </div> 
+          <a class='btn btn-sm btn-dark' href="{% url 'logout_page' %}">Logout</a>
+     
+    
+    <br>
     {% endfor %}
+    {% else %}
+    <br>
+
+    <h5 style="margin-left: 20px;">No notes to show</h5>
+    <h6 style=" color	:#808080;"><span style='font-size:25px;'>&#128072;</span>Create new notes now! </h6>
+    {% endif %}
     </div>
   </div>
   
