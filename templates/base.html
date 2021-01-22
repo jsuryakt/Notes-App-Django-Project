@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <style>
+            .show{
+                text-align: center;
+                width: 100;
+                height: 100;
+                background-color: rgb(174, 209, 179);
+                margin: auto;
+                scroll-padding-left: 10;
+
+             }
                p { 
                   color: #024d31f3; 
                  font-family: Helvetica
                  }
             .welcome
-             {text-align: left;
+             { text-align: left;
                 height: auto;
                 width: auto;
                 background-color: rgb(174, 209, 179);
@@ -38,6 +48,7 @@
                 margin: 20;  
             }
             .myDiv{
+                -o-animation: forwards;
                 text-align: center;
                 height: auto;
                 width: auto;
@@ -83,6 +94,8 @@
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>Django Project daa</title>
+        {% block extrahead %}
+        {% endblock %}
     </head>
     <body>
         {% block content %}

@@ -1,0 +1,36 @@
+<div class="centered">
+    <div class="welcome1"><h2  style="margin-left: 5%;">Public Posts</h2></div>
+    
+    {% if items %}
+    {% for item in items reversed %}
+      <div class="myDiv">
+          <hr>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description}}</p>
+          <br>
+          <div>
+          {% if item.image %}
+          <a href= "{{ item.image.url }}" download>
+             <img src="{{ item.image.url }}" class="img-responsive" style="width: 400px;height:200px; margin-right: 10px;"/>        
+          </a>
+            {% endif %}
+            <br>
+         </div>
+         
+          
+          
+        
+          <!-- <br>  <a class="btn btn-sm btn-danger" href="{% url 'print_page' item.id %}">View All</a>
+        </div>  -->
+          <!-- <a class='btn btn-sm btn-dark' href="{% url 'logout_page' %}">Logout</a> -->
+     
+    
+    <br>
+    {% endfor %}
+    {% else %}
+    <br>
+
+    <h5 style="margin-left: 20px;">No notes to show</h5>
+    <h6 style=" color	:#808080;"><span style='font-size:25px;'>&#128072;</span>Create new notes now! </h6>
+    {% endif %}
+    </div>

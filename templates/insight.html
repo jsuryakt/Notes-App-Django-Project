@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block extrahead %}
+<a class="btn btn-sm btn-danger" href="{% url 'documents_page' user.id %}">Show All PDF Files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'doc_page' user.id %}">Show All Doc/Docx files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'video_page' user.id %}">Show all video files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'audio_page' user.id %}">Show all audio files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'image_page' user.id %}">Show all Image files</a>
+
+<style>
+    .pdf {
+        margin-bottom: 20px;
+    }
+
+    .video {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+
+    {% if user.notes.all %}
+    <div class="pdf">
+            {% for item in user.notes.all reversed %}
+
+                {% if item.pdf %}
+                     <embed src= "{{ item.pdf.url }}" width="500" height="375" type="application/pdf"> 
+                {% endif %}
+
+            {% endfor %}
+        </div>
+        <div class="video">
+            {% for item in user.notes.all reversed %}
+
+                {% if item.video %}
+                <video width="320" height="240" controls>
+                    <source src="{{ item.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+                </video> 
+                <!-- <br/> -->
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

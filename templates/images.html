@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-sm btn-danger" href="{% url 'documents_page' user.id %}" >Show All PDF Files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'doc_page' user.id %}">Show All Doc/Docx files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'video_page' user.id %}">Show all video files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'audio_page' user.id %}">Show all audio files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'image_page' user.id %}" style="color: black;">Show all Image files</a>
+<br>
+<br>
+<!-- <h2 style=" font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">your image files</h2> -->
+<body>
+
+    {% if user.notes.all %}
+   
+            {% for item in user.notes.all reversed %}
+            <div style="padding-left: 20px; padding-right: 10px; align-items: center;box-shadow: black; border-style: solid; color: rgb(0, 0, 0); float: left;" >
+                {% if item.image %}
+                     <img src="{{ item.image.url }}" alt="Italian Trulli" width="400" height="200">
+                     
+                {% endif %}
+            </div>
+            
+            
+            {% endfor %}
+        
+    
+        {% endif %}
+        <br>
+        <a href="../../notes"><input type="button" value="Back" class="btn btn-primary" /></a>
+</body>
+{% endblock %}

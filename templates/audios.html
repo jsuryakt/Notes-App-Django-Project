@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-sm btn-danger" href="{% url 'documents_page' user.id %}" >Show All PDF Files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'doc_page' user.id %}">Show All Doc/Docx files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'video_page' user.id %}">Show all video files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'audio_page' user.id %}" style="color: black;">Show all audio files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'image_page' user.id %}">Show all Image files</a>
+<br>
+<br>
+<!-- <h2 style=" font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Your audio files</h2> -->
+<body>
+
+    {% if user.notes.all %}
+           
+            {% for item in user.notes.all reversed %}
+            <div class="myDiv">
+                {% if item.audio%}
+                <!-- <audio>
+                    <source src="{{ item.audio.url }}" type="audio/mp3">
+                </audio> -->
+                <audio controls="controls" src="{{ item.audio.url }}">
+                    Your browser does not support the HTML5 Audio element.
+                </audio>    
+                {% endif %}
+                
+            </div>
+            <br>
+            {% endfor %}
+    
+        {% endif %}
+        <br>
+        <a href="../../notes"><input type="button" value="Back" class="btn btn-primary" /></a>
+    
+</body>
+{% endblock %}

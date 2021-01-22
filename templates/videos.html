@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-sm btn-danger" href="{% url 'documents_page' user.id %}">Show All PDF Files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'doc_page' user.id %}">Show All Doc/Docx files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'video_page' user.id %}"  style="color: black;">Show All video files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'audio_page' user.id %}">Show all audio files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'image_page' user.id %}">Show all Image files</a>
+<br>
+<br>
+<h2 style=" font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">your video files</h2>
+<body>
+
+    {% if user.notes.all %}
+           
+    <div style="padding-left: 20px;padding-right: 10px; align-items: center;">
+        {% for item in user.notes.all reversed %}
+
+            {% if item.video %}
+            <video width="320" height="240" controls>
+                <source src="{{ item.video.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+            </video> 
+            <!-- <br/> -->
+            {% endif %}
+
+        {% endfor %}
+    </div>
+    
+        {% endif %}
+        <!-- <a class="btn btn-sm btn-danger" href="goback">Back to Notes</a> -->
+        <a href="../../notes"><input type="button" value="Back" class="btn btn-primary" /></a>
+
+</body>
+{% endblock %}
