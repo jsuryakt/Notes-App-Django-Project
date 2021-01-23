@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-sm btn-danger" href="{% url 'documents_page' user.id %}" >Show All PDF Files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'doc_page' user.id %}" style="color: black;">Show All Doc/Docx files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'video_page' user.id %}">Show all video files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'audio_page' user.id %}">Show all audio files</a>
+<a class="btn btn-sm btn-danger" href="{% url 'image_page' user.id %}">Show all Image files</a>
+<br>
+<br>
+<!-- <h2 style=" font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Your .doc files</h2> -->
+<body>
+
+    {% if user.notes.all %}
+           
+            {% for item in user.notes.all reversed %}
+            <div class="myDiv">
+                {% if item.doc %}
+        
+                        <iframe src= "{{ item.doc.url }}" ></iframe>
+                        <!-- <iframe src='https://view.officeapps.live.com/op/embed.aspx?src={{item.doc.url }}' frameborder='0'></iframe> -->
+                        <!-- <iframe src='https://docs.google.com/viewer?url={{ item.doc.url }}&embedded=true' frameborder='0'></iframe> -->
+                        <!-- <iframe src='//docs.google.com/gview?url={{ item.doc.url }}&embedded=true' frameborder='0'></iframe -->
+                            {% endif %}
+                
+            </div>
+            <br>
+            {% endfor %}
+    
+        {% endif %}
+        <br>
+        <a href="../../notes"><input type="button" value="Back" class="btn btn-primary" /></a>
+</body>
+{% endblock %}

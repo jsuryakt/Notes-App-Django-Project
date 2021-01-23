@@ -1,24 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
+
 <div class="split left">
     <div class="centered">
-       <div class="welcome"><h1 style="margin-left: 5%;">Welcome {{request.user}},</h1></div>
-       <br>
-       <br>
-       <br>
-       <br>
+       <div ><h1  class="title" style="margin-left: 5%;">Welcome {{request.user}},</h1></div>
+       <!-- <a style="text-align: center;" class="btn btn-sm btn-info" href="{% url 'insight_page' user.id %}">Insight</a> -->
+       <!-- <a class="btn btn-sm btn-danger" href="{% url 'documents_page' user.id %}">View</a> -->
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'documents_page' user.id %}"><input type="button" value="Data Insights" class="btn btn-primary" /></a>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="public_all"><input type="button" value="Public Posts" class="btn btn-primary" /></a>
+       <br><br>
         <div class="welcome2">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div   class="form-group margi-lef" >
+            <div  class="form-group margi-lef" >
             <label>Title</label>
             <p>{{ form.title }}</p>
             <label>Description</label>
-            <p>{{ form.description }}</p>
+            <p >{{ form.description }}</p>
             <p>Image</p>
             <p name="image">{{form.image}}</p>
+            <p>Pdf File</p>
+            <p name="pdf">{{form.pdf}}</p>
+            <p>Doc File</p>
+            <p name="doc">{{form.doc}}</p>
+            <p>Video File(.mp4)</p>
+            <p name="video">{{form.video}}</p>
+            <p>Audio File</p>
+            <p name="audio">{{form.audio}}</p>
+
             </div>
             <button style="margin-left: 25%;" type="submit" class="btn  btn-success"><span style="width: 18px; height: 18px;" class="spinner-grow spinner-grow-sm"> </span> Save Notes </button>
+            <br>
+            <br>
             <br>
         </form>
       </div>
@@ -28,6 +43,7 @@
   <div class="split right">
     <div class="centered">
     <div class="welcome1"><h2  style="margin-left: 5%;">Your Contents</h2></div>
+    
     {% if user.notes.all %}
     {% for item in user.notes.all reversed %}
   
@@ -42,10 +58,12 @@
              <img src="{{ item.image.url }}" class="img-responsive" style="width: 400px;height:200px; margin-right: 10px;"/>        
           </a>
             {% endif %}
+            <br>
          </div>
          
           <a class="btn btn-sm btn-info" href="{% url 'update_page' item.id %}">Update</a>
           <a class="btn btn-sm btn-danger" href="{% url 'delete_page' item.id %}">Delete</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'print_page' item.id %}">View All</a>
           <br>
         </div> 
           <a class='btn btn-sm btn-dark' href="{% url 'logout_page' %}">Logout</a>

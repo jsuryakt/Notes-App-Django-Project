@@ -7,17 +7,22 @@ from django.contrib.auth import authenticate,login,logout
 from .models import *
 from .forms import CreateUserForm,notesForm
 from django.contrib.auth import *
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required   
 
 @login_required(login_url='login_page')
 def notes_view(request):
     queryset = Notes.objects.all()
     form = notesForm(request.POST, request.FILES)
+    # v_url
     if form.is_valid():
         n = form.cleaned_data["title"]
-        d = form.cleaned_data["description"]
+        des = form.cleaned_data["description"]
         i=  form.cleaned_data["image"]
-        t = Notes(title=n,description=d,image=i)
+        p= form.cleaned_data["pdf"]
+        d=form.cleaned_data["doc"]
+        v= form.cleaned_data["video"]
+        a=form.cleaned_data["audio"]
+        t = Notes(title=n,description=des,image=i,pdf=p,doc=d,video=v,audio=a)
         t.save()
         request.user.notes.add(t)
         return redirect('notes_page')
@@ -86,10 +91,126 @@ def update_view(request,pk ):
     }
     return render(request,"notes.html",context)
 
-def delete_view(request,pk ):
+def delete_view(request,pk):
     note = Notes.objects.get(id=pk)
     if request.method == "POST":
         note.delete()
         return redirect('notes_page')
     context = {'item':note}
     return render(request, 'delete.html',context)
+
+def print_view(request,pk):
+    note= Notes.objects.get(id=pk)
+    context={
+            'item':note
+    }
+    return render(request,"print_view.html",context)
+
+def insight_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+            'items':queryset
+              } 
+    
+    return render(request,"insight.html",context)
+
+def documents_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+            'items':queryset
+              } 
+    
+    return render(request,"documents.html",context)
+def doc_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+            'items':queryset
+              } 
+    
+    return render(request,"doc.html",context)
+
+def video_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+            'items':queryset
+              } 
+    
+    return render(request,"videos.html",context)
+
+
+def image_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+            'items':queryset
+              } 
+    
+    return render(request,"images.html",context)
+
+def audio_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+            'items':queryset
+              } 
+    
+    return render(request,"audios.html",context)
+
+
+def go_back_view(request,pk):
+    queryset = Notes.objects.all()
+    form = notesForm(request.POST, request.FILES)
+    # v_url
+    context={'form':form ,
+            'items':queryset
+     }   
+    return render(request,"notes.html",context)
+
+def about_view(request):
+
+    # v_url
+    return render(request,"aboutus.html")
+
+def support_view(request):
+
+    # v_url
+    return render(request,"support.html")
+
+def publish_view(request,pk):
+    t = Notes.objects.get(id=pk)
+    t.publish= 1 # change field
+    t.save()
+    queryset = Notes.objects.filter(publish=1)
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+             'items':queryset
+              } 
+    
+    return render(request, 'public_pages.html',context)
+
+def public_view(request):
+    queryset = Notes.objects.filter(publish=1)
+    form = notesForm(request.POST, request.FILES)
+    # v_url
+    context={'form':form ,
+            'items':queryset
+          }   
+    return render(request,"public_pages.html",context)
+    
+def private_view(request,pk):
+    t = Notes.objects.get(id=pk)
+    t.publish= 0 # change field
+    t.save()
+    queryset = Notes.objects.filter(publish=1)
+    form = notesForm(request.POST, request.FILES)
+    context={'form':form ,
+             'items':queryset
+              } 
+    
+    return render(request, 'public_pages.html',context)
+
+

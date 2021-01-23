@@ -27,13 +27,13 @@ ul li a{
 	transition: 0.6s ease;
 }
 ul li.active a{
-	background-color: #fff;
-	color: #000;
+	background-color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 
 }
 ul li a:hover{
 	background-color: #fff;
-	color: #00;
+	color: #fff;
 }
 .logo img{
 	float: left;
@@ -71,6 +71,6 @@ ul li a:hover{
 }
 .btn:hover{
 	background-color: #FF0D01;
-	color: #00;
+	color: #FF0D0;
 
 }

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+  <script>
+    var doc = new jsPDF();
+
+function saveDiv(divId, title) {
+doc.fromHTML(`<html><head><title>${title}</title></head><body>` + document.getElementById(divId).innerHTML + `</body></html>`);
+doc.save('div.pdf');
+}
+
+function printDiv(divId,
+title) {
+
+let mywindow = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
+
+mywindow.document.write(`<html><head><title>${title}</title>`);
+mywindow.document.write('</head><body >');
+mywindow.document.write(document.getElementById(divId).innerHTML);
+mywindow.document.write('</body></html>');
+
+mywindow.document.close(); // necessary for IE >= 10
+mywindow.focus(); // necessary for IE >= 10*/
+
+mywindow.print();
+mywindow.close();
+
+return true;
+}
+</script>
+</head>
+<div class="centered">
+    <div class="welcome1"><h2  style="margin-left: 5%;">Your Contents</h2></div>
+      
+      <div  class="myDiv">
+          <hr>
+          <div id="pdf"> 
+            <p><h3>{{ item.title }}</h3>
+             {{ item.description}}</p>
+          </div>
+         
+          <br>
+          <div >
+          {% if item.image %}
+          <a href= "{{ item.image.url }}" download>
+             <img src="{{ item.image.url }}" class="img-responsive" style="width:400px;height:200px; margin-right: 10px;"/>        
+          </a>
+            {% endif %}
+            <br>
+         </div>
+         <br>
+         <br>
+         
+         <div>
+          <p>Video File</p>
+          {% if item.video %}
+          <video width="320" height="240" controls>
+              <source src="{{ item.video.url }}" type="video/mp4">
+          Your browser does not support the video tag.
+          </video>
+          <div>
+            <p>Audio File</p>
+            {% if item.audio%}
+            <!-- <audio>
+                <source src="{{ item.audio.url }}" type="audio/mp3">
+            </audio> -->
+            <audio controls="controls" src="{{ item.audio.url }}">
+                Your browser does not support the HTML5 Audio element.
+            </audio>    
+            {% endif %}
+            
+            <div>
+              {% if item.pdf %}
+              <p>Pdf File</p>
+                   <embed src= "{{ item.pdf.url }}" width="500" height="375" type="application/pdf"> 
+              {% endif %}</div>
+        </div>
+
+          <!-- <br/> -->
+          {% endif %}
+         </div>
+
+         
+         
+          <a class="btn btn-sm btn-info" href="{% url 'update_page' item.id %}">Update</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'delete_page' item.id %}">Delete</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'publish' item.id %}">Publish</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'private' item.id %}">Private</a>
+          <br>
+        </div> 
+          <a class='btn btn-sm btn-dark' href="{% url 'logout_page' %}">Logout</a>
+     
+    
+    <br>
+
+    <br>
+    </div>
+    <button onclick="printDiv('pdf','Title')">print div</button>
+    <button onclick="saveDiv('pdf','Title')">save div as pdf</button>
+
+{% endblock %}
